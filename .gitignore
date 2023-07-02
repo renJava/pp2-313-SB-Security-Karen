@@ -17,10 +17,12 @@ target/
 ### IntelliJ IDEA ###
 /.idea
 .idea
-#.gitignore
 *.iws
 *.iml
 *.ipr
+
+### .gitignore ###
+#.gitignore
 
 ### NetBeans ###
 /nbproject/private/
