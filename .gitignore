@@ -12,7 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
-.mvn/wrapper
+.mvn/
 
 ### IntelliJ IDEA ###
 /.idea
@@ -22,7 +22,7 @@ target/
 *.ipr
 
 ### .gitignore ###
-#.gitignore
+.gitignore
 
 ### NetBeans ###
 /nbproject/private/
