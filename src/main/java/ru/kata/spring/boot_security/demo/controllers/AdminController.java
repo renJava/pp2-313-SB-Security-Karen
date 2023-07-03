@@ -72,4 +72,5 @@ public class AdminController {
         userService.saveUser(user);
         return "redirect:/admin";
     }
+
 }
