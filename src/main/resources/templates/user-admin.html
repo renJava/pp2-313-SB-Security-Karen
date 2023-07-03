@@ -9,7 +9,7 @@
     }
 
     table { width: 100%;
-        padding-left: 5em;
+        padding-left: 2em;
         font: bold 0.8em Arial, sans-serif;
         border: 2px solid black; margin-left: 10%;
         /*width: 50em;*/
@@ -75,13 +75,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Users</title>
+    <title>Users Table</title>
 </head>
 <body>
 
+
+
 <div>
     <table>
-        <caption>User</caption>
+        <caption>Состав участников</caption>
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -90,18 +92,32 @@
             <th>Username</th>
             <th>Password</th>
             <th>Roles</th>
+            <th colspan="2">Action</th>
         </tr>
-        <tr>
-            <td th:text="${currentUser.getId()}"></td>
-            <td th:text="${currentUser.getName()}"></td>
-            <td th:text="${currentUser.getLastName()}"></td>
-            <td th:text="${currentUser.getAge()}"></td>
-            <td th:text="${currentUser.getUsername()}"></td>
-            <td th:text="${currentUser.getPassword()}"></td>
-            <td th:text="${currentUser.getRoles()}"></td>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getPassword()}"></td>
+            <td th:text="${user.getRoles()}"></td>
+            <td>
+                <form method="get" th:action="@{/admin/user-update/{id}(id=${user.getId()})}">
+                    <button type="submit">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{/admin/user-delete/{id}(id=${user.getId()})}">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
     </table>
 </div>
+<p><a th:href="@{/admin/user-create}">Create user</a></p>
+<p><a th:href="@{/user}">Parently Admin</a></p>
 <p><a th:href="@{/logout}">Logout</a></p>
 </body>
 

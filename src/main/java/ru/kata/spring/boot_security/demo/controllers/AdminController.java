@@ -30,7 +30,7 @@ public class AdminController {
     @GetMapping
     public String printUsers(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "user-list";
+        return "user-admin";
     }
 
     @GetMapping("/user-create")
