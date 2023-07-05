@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -40,20 +41,22 @@ public class AdminController {
         return "user-create";
     }
 
+    static final String REDIRECT_ADMIN = "redirect:/admin";
+
     @PostMapping
+    @Transactional  //Корректное добавление пользователя
     public String addUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "user-create";
         }
-
         userService.saveUser(user);
-        return "redirect:/admin";
+        return REDIRECT_ADMIN;
     }
 
     @DeleteMapping("/user-delete/{id}")
     public String deleteUserFromTable(@PathVariable("id") Long id) {
         userService.deleteById(id);
-        return "redirect:/admin";
+        return REDIRECT_ADMIN;
     }
 
     @GetMapping("/user-update/{id}")
@@ -64,13 +67,14 @@ public class AdminController {
     }
 
     @PatchMapping("/user-update")
+    @Transactional    //Корректное обновление пользователя
     public String updateUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "user-update";
         }
 
         userService.saveUser(user);
-        return "redirect:/admin";
+        return REDIRECT_ADMIN;
     }
 
 }
