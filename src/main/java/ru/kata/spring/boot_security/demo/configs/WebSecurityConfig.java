@@ -43,6 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+//                        .and()
+//                .authorizeRequests()
+//                .antMatchers("/css/**").permitAll(); // разрешаем доступ к файлам CSS
+//        http.csrf().disable();
     }
 
     @Bean
